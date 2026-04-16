@@ -1,0 +1,1235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>AceCloud Pricing</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f9fc;
+      --surface: #ffffff;
+      --surface-2: #f1f3f8;
+      --border: #e4e7ef;
+      --text: #111827;
+      --text-2: #4b5563;
+      --text-3: #9ca3af;
+      --accent: #2563eb;
+      --accent-light: #eff3ff;
+      --accent-2: #7c3aed;
+      --green: #16a34a;
+      --green-light: #f0fdf4;
+      --amber: #d97706;
+      --amber-light: #fffbeb;
+      --red: #dc2626;
+      --gpu-accent: #7c3aed;
+      --radius: 12px;
+      --radius-sm: 8px;
+      --shadow: 0 1px 3px rgba(0,0,0,.06), 0 2px 8px rgba(0,0,0,.05);
+      --shadow-md: 0 4px 16px rgba(0,0,0,.08), 0 1px 4px rgba(0,0,0,.04);
+      --shadow-hover: 0 8px 28px rgba(37,99,235,.13), 0 2px 8px rgba(0,0,0,.05);
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #1d2f5e 100%);
+      color: #fff;
+      padding: 72px 24px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% -10%, rgba(99,102,241,.25) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      color: #a5b4fc;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 99px;
+      margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 48px);
+      font-weight: 700;
+      letter-spacing: -.02em;
+      margin-bottom: 14px;
+      line-height: 1.15;
+    }
+    .hero p {
+      font-size: 17px;
+      color: #94a3b8;
+      max-width: 520px;
+      margin: 0 auto 28px;
+    }
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .hero-badge {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 99px;
+      padding: 5px 14px;
+      font-size: 13px;
+      color: #cbd5e1;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .hero-badge span { color: #4ade80; font-size: 10px; }
+
+    /* ── STICKY NAV ── */
+    .nav-wrap {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255,255,255,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      padding: 12px 0;
+    }
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-btn {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      white-space: nowrap;
+      background: none;
+      border: 1px solid transparent;
+      border-radius: var(--radius-sm);
+      padding: 7px 15px;
+      font-size: 13.5px;
+      font-weight: 500;
+      color: var(--text-2);
+      cursor: pointer;
+      transition: all .18s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .nav-btn:hover { background: var(--surface-2); color: var(--text); }
+    .nav-btn.active {
+      background: var(--accent-light);
+      border-color: #bfdbfe;
+      color: var(--accent);
+      font-weight: 600;
+    }
+    .nav-btn .nav-icon { font-size: 15px; }
+
+    .nav-controls {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-left: 12px;
+  flex-shrink: 0;
+}
+
+.currency-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-3);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  white-space: nowrap;
+}
+
+.currency-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  padding: 8px 36px 8px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--text-3) 50%),
+    linear-gradient(135deg, var(--text-3) 50%, transparent 50%);
+  background-position:
+    calc(100% - 18px) calc(50% - 3px),
+    calc(100% - 12px) calc(50% - 3px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+}
+
+.currency-select:focus {
+  outline: none;
+  border-color: #bfdbfe;
+  box-shadow: 0 0 0 3px rgba(37,99,235,.12);
+}
+
+    /* ── MAIN ── */
+    .main { max-width: 1200px; margin: 0 auto; padding: 56px 24px 80px; }
+
+    /* ── SECTION HEADER ── */
+    .section-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .icon-blue { background: var(--accent-light); }
+    .icon-purple { background: #f3f0ff; }
+    .icon-green { background: var(--green-light); }
+    .icon-amber { background: var(--amber-light); }
+    .icon-red { background: #fff5f5; }
+    .section-header-text h2 {
+      font-size: 22px;
+      font-weight: 700;
+      letter-spacing: -.01em;
+      margin-bottom: 3px;
+    }
+    .section-header-text p {
+      font-size: 13.5px;
+      color: var(--text-3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .billing-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: 2px 9px;
+      font-size: 11.5px;
+      font-weight: 500;
+      color: var(--text-2);
+    }
+
+    .section-block { margin-bottom: 60px; scroll-margin-top: 70px; }
+
+    /* ── COMPUTE CARDS ── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 24px;
+      box-shadow: var(--shadow);
+      transition: transform .2s, box-shadow .2s, border-color .2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: #bfdbfe;
+    }
+    .card-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 99px;
+      margin-bottom: 12px;
+      align-self: flex-start;
+    }
+    .badge-blue { background: var(--accent-light); color: var(--accent); }
+    .badge-purple { background: #f3f0ff; color: var(--gpu-accent); }
+    .badge-green { background: var(--green-light); color: var(--green); }
+    .badge-amber { background: var(--amber-light); color: var(--amber); }
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      letter-spacing: -.01em;
+    }
+    .card-subtitle {
+      font-size: 12.5px;
+      color: var(--text-3);
+      margin-bottom: 16px;
+    }
+    .card-price {
+      font-family: 'DM Mono', monospace;
+      font-size: 26px;
+      font-weight: 500;
+      color: var(--text);
+      letter-spacing: -.02em;
+      margin-bottom: 2px;
+    }
+    .card-price .unit {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--text-3);
+      font-family: 'DM Sans', sans-serif;
+      letter-spacing: 0;
+    }
+    .card-price-label {
+      font-size: 11px;
+      color: var(--text-3);
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 16px;
+    }
+    .card-divider { height: 1px; background: var(--border); margin: 16px 0; }
+    .card-features { list-style: none; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .card-features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: var(--text-2);
+    }
+    .card-features li::before {
+      content: '✓';
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: var(--accent-light);
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .card-cta {
+      margin-top: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .btn-link {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--accent);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      transition: gap .15s;
+    }
+    .btn-link:hover { gap: 8px; }
+    .btn-link::after { content: '→'; }
+
+    /* ── GPU TABLE ── */
+    .gpu-table-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .gpu-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .gpu-table thead tr {
+      background: #f8f9fc;
+      border-bottom: 1px solid var(--border);
+    }
+    .gpu-table th {
+      padding: 13px 18px;
+      font-size: 11.5px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .07em;
+      color: var(--text-3);
+      text-align: left;
+    }
+    .gpu-table th:last-child { text-align: right; }
+    .gpu-table tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background .15s;
+    }
+    .gpu-table tbody tr:last-child { border-bottom: none; }
+    .gpu-table tbody tr:hover { background: var(--accent-light); }
+    .gpu-table td {
+      padding: 14px 18px;
+      font-size: 14px;
+      color: var(--text-2);
+      vertical-align: middle;
+    }
+    .gpu-table td:first-child { color: var(--text); font-weight: 600; }
+    .gpu-name-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .gpu-arch-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .arch-blackwell { background: #fce7f3; color: #9d174d; }
+    .arch-hopper { background: #ede9fe; color: #5b21b6; }
+    .arch-ada { background: #dbeafe; color: #1d4ed8; }
+    .arch-ampere { background: #d1fae5; color: #065f46; }
+    .gpu-price-cell {
+      text-align: right;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+    .gpu-price-mono {
+      font-family: 'DM Mono', monospace;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+    }
+    .btn-sm {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 14px;
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: all .15s;
+      border: 1px solid;
+      white-space: nowrap;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .btn-outline {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text-2);
+    }
+    .btn-outline:hover {
+      background: var(--accent-light);
+      border-color: #bfdbfe;
+      color: var(--accent);
+    }
+
+    /* ── STORAGE CARDS ── */
+    .cards-3 { grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); }
+
+    /* ── DBaaS CARD ── */
+    .dbaas-card {
+      background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+      color: #fff;
+      border: none;
+    }
+    .dbaas-card:hover { border-color: transparent; box-shadow: 0 12px 40px rgba(15,23,42,.25); }
+    .dbaas-card .card-title { color: #fff; }
+    .dbaas-card .card-subtitle { color: #94a3b8; }
+    .dbaas-card .card-price { color: #fff; }
+    .dbaas-card .card-price .unit { color: #64748b; }
+    .dbaas-card .card-price-label { color: #64748b; }
+    .dbaas-card .card-divider { background: rgba(255,255,255,.08); }
+    .dbaas-card .card-features li { color: #94a3b8; }
+    .dbaas-card .card-features li::before { background: rgba(255,255,255,.08); color: #4ade80; }
+    .dbaas-card .btn-link { color: #7dd3fc; }
+
+    /* ── FOOTER STRIP ── */
+    .footer-strip {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .footer-strip p {
+      font-size: 14px;
+      color: var(--text-3);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .footer-strip a { color: var(--accent); text-decoration: none; font-weight: 500; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .gpu-table th:nth-child(2),
+      .gpu-table td:nth-child(2) { display: none; }
+      .gpu-table th:nth-child(3),
+      .gpu-table td:nth-child(3) { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-label">☁️ AceCloud</div>
+  <h1>Transparent Cloud Server Pricing</h1>
+  <p>Deploy infrastructure in seconds. No hidden fees, no surprises. Deploy in seconds.</p>
+  <div class="hero-badges">
+    <div class="hero-badge"><span>●</span> No lock-in contracts</div>
+    <div class="hero-badge"><span>●</span> Hourly &amp; monthly billing</div>
+    <div class="hero-badge"><span>●</span> 4th-Gen AMD &amp; Intel hardware</div>
+    <div class="hero-badge"><span>●</span> Deploy in seconds</div>
+  </div>
+</div>
+
+<!-- STICKY NAV -->
+<nav class="nav-wrap">
+  <div class="nav-inner">
+    <button type="button" class="nav-btn active" onclick="scrollToSection('compute', this)"><span class="nav-icon">🖥️</span> Cloud Compute</button>
+<button type="button" class="nav-btn" onclick="scrollToSection('gpu', this)"><span class="nav-icon">⚡</span> Cloud GPUs</button>
+<button type="button" class="nav-btn" onclick="scrollToSection('storage', this)"><span class="nav-icon">💾</span> Storage &amp; Backup</button>
+<button type="button" class="nav-btn" onclick="scrollToSection('network', this)"><span class="nav-icon">🌐</span> Network</button>
+<button type="button" class="nav-btn" onclick="scrollToSection('dbaas', this)"><span class="nav-icon">🗄️</span> DBaaS</button>
+<button type="button" class="nav-btn" onclick="scrollToSection('fwaas', this)"><span class="nav-icon">🛡️</span> FWaaS</button>
+
+    <div class="nav-controls">
+      <label class="currency-label" for="currencySelector"></label>
+      <select id="currencySelector" class="currency-select" onchange="setCurrency(this.value)">
+        <option value="INR" selected>₹ INR</option>
+        <option value="USD">$ USD</option>
+      </select>
+    </div>
+  </div>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- ── COMPUTE ── -->
+  <section id="compute" class="section-block">
+    <div class="section-header">
+      <div class="section-icon icon-blue">🖥️</div>
+      <div class="section-header-text">
+        <h2>Cloud Compute</h2>
+        <p>
+          <span class="billing-pill">⏱ Hourly billing</span>
+          <span class="billing-pill">📅 Monthly billing</span>
+          Powered by 4th-Gen AMD &amp; Intel processors
+        </p>
+      </div>
+    </div>
+    <div class="cards-grid">
+
+      <div class="card">
+        <span class="card-badge badge-blue">General Purpose</span>
+        <div class="card-title">Standard Instance</div>
+        <div class="card-subtitle">Best for web apps &amp; APIs</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">
+          <span class="js-dynamic-price"
+                data-resource-name="S2a.medium"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span> <span class="unit">/ hr</span>
+              </div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Up to 64 vCPUs</li>
+          <li>Up to 256 GB RAM</li>
+          <li>4th-Gen AMD / Intel</li>
+          <li>Hourly or Monthly billing</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/standard-instance/s3a/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-blue">CPU Optimised</span>
+        <div class="card-title">CPU Intensive</div>
+        <div class="card-subtitle">Best for compute-heavy workloads</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">
+        <span class="js-dynamic-price"
+                data-resource-name="C2a.medium"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span> <span class="unit">/ hr</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Up to 64 vCPUs</li>
+          <li>Up to 128 GB RAM</li>
+          <li>4th-Gen AMD / Intel</li>
+          <li>Hourly or Monthly billing</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/cpu-intensive/c3a/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-blue">Memory Optimised</span>
+        <div class="card-title">RAM Intensive</div>
+        <div class="card-subtitle">Best for in-memory databases</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">
+        <span class="js-dynamic-price"
+                data-resource-name="M2a.medium"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span> <span class="unit">/ hr</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Up to 32 vCPUs</li>
+          <li>Up to 256 GB RAM</li>
+          <li>4th-Gen AMD / Intel</li>
+          <li>Hourly or Monthly billing</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/ram-intensive/m3a/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-amber">Windows</span>
+        <div class="card-title">Windows SQL Cloud</div>
+        <div class="card-subtitle">Best for SQL Server workloads</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">
+        <span class="js-dynamic-price"
+                data-resource-name="WM-SQL.30"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span> <span class="unit">/ hr</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Up to 32 vCPUs</li>
+          <li>Up to 240 GB RAM</li>
+          <li>4th-Gen AMD / Intel</li>
+          <li>Hourly or Monthly billing</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/windows/inr/noida/windows-sql-cloud/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── GPU ── -->
+  <section id="gpu" class="section-block">
+    <div class="section-header">
+      <div class="section-icon icon-purple">⚡</div>
+      <div class="section-header-text">
+        <h2>Cloud GPUs</h2>
+        <p>
+          <span class="billing-pill">📅 Monthly</span>
+          <span class="billing-pill">📆 Half-Yearly</span>
+          <span class="billing-pill">🗓 Yearly</span>
+          NVIDIA data-centre GPUs for AI, ML &amp; rendering
+        </p>
+      </div>
+    </div>
+
+    <div class="gpu-table-wrap">
+      <table class="gpu-table">
+        <thead>
+          <tr>
+            <th>GPU Model</th>
+            <th>Architecture</th>
+            <th>VRAM</th>
+            <th>Tensor Cores</th>
+            <th style="text-align:right">Price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="gpu-name-row">NVIDIA H200</div>
+            </td>
+            <td><span class="gpu-arch-badge arch-hopper">Hopper</span></td>
+            <td>141 GB HBM3e</td>
+            <td>4th Gen</td>
+            <td>
+              <div class="gpu-price-cell">
+                <span class="gpu-price-mono js-dynamic-price"
+                data-resource-name="N.H200.24.282"
+                data-currency="INR"
+                data-field="price_per_month" data-max-fraction-digits="2">Loading...</span><span>/month</span>
+                <a href="https://acecloud.ai/pricing/linux/inr/noida/nvidia-h200-nvl/" target="_blank" class="btn-sm btn-outline">View</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="gpu-name-row">NVIDIA H100</div></td>
+            <td><span class="gpu-arch-badge arch-hopper">Hopper</span></td>
+            <td>80 GB HBM3e</td>
+            <td>4th Gen</td>
+            <td>
+              <div class="gpu-price-cell">
+                <span class="gpu-price-mono js-dynamic-price"
+                data-resource-name="N.HGXH100.250"
+                data-currency="INR"
+                data-field="price_per_month" data-max-fraction-digits="2">Loading...</span><span>/month</span>
+                <a href="https://acecloud.ai/pricing/linux/inr/noida/nvidia-h100-hgx/" target="_blank" class="btn-sm btn-outline">View</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="gpu-name-row">RTX Pro 6000</div></td>
+            <td><span class="gpu-arch-badge arch-blackwell">Blackwell</span></td>
+            <td>96 GB GDDR7</td>
+            <td>5th Gen</td>
+            <td>
+              <div class="gpu-price-cell">
+                <span class="gpu-price-mono js-dynamic-price"
+                data-resource-name="N.PRO6000.16.128"
+                data-currency="INR"
+                data-field="price_per_month" data-max-fraction-digits="2">Loading...</span><span>/month</span>
+                <a href="https://acecloud.ai/pricing/linux/inr/noida/rtx-pro-6000-96gb/" target="_blank" class="btn-sm btn-outline">View</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="gpu-name-row">NVIDIA A100</div></td>
+            <td><span class="gpu-arch-badge arch-ampere">Ampere</span></td>
+            <td>80 GB HBM2e</td>
+            <td>3rd Gen</td>
+            <td>
+              <div class="gpu-price-cell">
+                <span class="gpu-price-mono js-dynamic-price"
+                data-resource-name="N.A100.128"
+                data-currency="INR"
+                data-field="price_per_month" data-max-fraction-digits="2">Loading...</span><span>/month</span>
+                <a href="https://acecloud.ai/pricing/linux/inr/noida/nvidia-a100-80gb/" target="_blank" class="btn-sm btn-outline">View</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="gpu-name-row">NVIDIA L40S</div></td>
+            <td><span class="gpu-arch-badge arch-ada">Ada Lovelace</span></td>
+            <td>48 GB GDDR6</td>
+            <td>4th Gen</td>
+            <td>
+              <div class="gpu-price-cell">
+                <span class="gpu-price-mono js-dynamic-price"
+                data-resource-name="N.L40S.64"
+                data-currency="INR"
+                data-field="price_per_month" data-max-fraction-digits="2">Loading...</span><span>/month</span>
+                <a href="https://acecloud.ai/pricing/linux/inr/noida/nvidia-l40s-48gb/" target="_blank" class="btn-sm btn-outline">View</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="gpu-name-row">RTX 6000 Ada</div></td>
+            <td><span class="gpu-arch-badge arch-ada">Ada Lovelace</span></td>
+            <td>48 GB GDDR6</td>
+            <td>3rd Gen</td>
+            <td>
+              <div class="gpu-price-cell">
+                <span class="gpu-price-mono js-dynamic-price"
+                data-resource-name="N.RTX6000ADA.64"
+                data-currency="INR"
+                data-field="price_per_month" data-max-fraction-digits="2">Loading...</span><span>/month</span>
+                <a href="https://acecloud.ai/pricing/linux/inr/noida/nvidia-rtx-6000-ada-48gb/" target="_blank" class="btn-sm btn-outline">View</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="gpu-name-row">NVIDIA RTX A6000</div></td>
+            <td><span class="gpu-arch-badge arch-ampere">Ampere</span></td>
+            <td>48 GB GDDR6</td>
+            <td>3rd Gen</td>
+            <td>
+              <div class="gpu-price-cell">
+                <span class="gpu-price-mono js-dynamic-price"
+                data-resource-name="N.RTXA6000.64"
+                data-currency="INR"
+                data-field="price_per_month" data-max-fraction-digits="2">Loading...</span><span>/month</span>
+                <a href="https://acecloud.ai/pricing/linux/inr/noida/rtx-a6000-48gb/" target="_blank" class="btn-sm btn-outline">View</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="gpu-name-row">NVIDIA A30</div></td>
+            <td><span class="gpu-arch-badge arch-ampere">Ampere</span></td>
+            <td>24 GB HBM2</td>
+            <td>3rd Gen</td>
+            <td>
+              <div class="gpu-price-cell">
+                <span class="gpu-price-mono js-dynamic-price"
+                data-resource-name="N.A30.32"
+                data-currency="INR"
+                data-field="price_per_month" data-max-fraction-digits="2">Loading...</span><span>/month</span>
+                <a href="https://acecloud.ai/pricing/linux/inr/noida/nvidia-a30-24gb/" target="_blank" class="btn-sm btn-outline">View</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="gpu-name-row">NVIDIA L4</div></td>
+            <td><span class="gpu-arch-badge arch-ada">Ada Lovelace</span></td>
+            <td>24 GB GDDR6</td>
+            <td>3rd Gen</td>
+            <td>
+              <div class="gpu-price-cell">
+                <span class="gpu-price-mono js-dynamic-price"
+                data-resource-name="N.L4.32"
+                data-currency="INR"
+                data-field="price_per_month" data-max-fraction-digits="2">Loading...</span><span>/month</span>
+                <a href="https://acecloud.ai/pricing/linux/inr/noida/nvidia-l4-24gb/" target="_blank" class="btn-sm btn-outline">View</a>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td><div class="gpu-name-row">NVIDIA A2</div></td>
+            <td><span class="gpu-arch-badge arch-ampere">Ampere</span></td>
+            <td>16 GB GDDR6</td>
+            <td>3rd Gen</td>
+            <td>
+              <div class="gpu-price-cell">
+                <span class="gpu-price-mono js-dynamic-price"
+                data-resource-name="N.A2.32"
+                data-currency="INR"
+                data-field="price_per_month" data-max-fraction-digits="2">Loading...</span><span>/month</span>
+                <a href="https://acecloud.ai/pricing/linux/inr/noida/nvidia-a2-16gb/" target="_blank" class="btn-sm btn-outline">View</a>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ── STORAGE ── -->
+  <section id="storage" class="section-block">
+    <div class="section-header">
+      <div class="section-icon icon-green">💾</div>
+      <div class="section-header-text">
+        <h2>Storage &amp; Backup</h2>
+        <p>
+          <span class="billing-pill">⏱ Hourly billing</span>
+          Persistent, encrypted, high-durability storage
+        </p>
+      </div>
+    </div>
+    <div class="cards-grid cards-4">
+
+      <div class="card">
+        <span class="card-badge badge-green">Backup</span>
+        <div class="card-title">Backup</div>
+        <div class="card-subtitle">Automated scheduled backups</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">
+          <span class="js-dynamic-price"
+                data-resource-name="Backup"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span>
+         <span class="unit">/GB-hour</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Auto-scheduled</li>
+          <li>Encrypted at rest</li>
+          <li>Easy one-click restore</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/backup/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-green">Block Storage</span>
+        <div class="card-title">Block Storage</div>
+        <div class="card-subtitle">High-speed NVMe SSD volumes</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">
+        <span class="js-dynamic-price"
+                data-resource-name="NVMe based High IOPS Storage"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span> <span class="unit">/GB-hour</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>NVMe SSD</li>
+          <li>Live resize (no downtime)</li>
+          <li>Instant snapshots</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/block-storage/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-green">Object Storage</span>
+        <div class="card-title">Object Storage</div>
+        <div class="card-subtitle">S3-compatible, CDN-ready</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">
+           <span class="js-dynamic-price"
+                data-resource-name="Storage replicated x3"
+                data-currency="INR"
+                data-field="price_per_month">Loading...</span>
+         <span class="unit">/GB-hour</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>API driven (S3-compat)</li>
+          <li>High durability</li>
+          <li>CDN ready</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/object-storage/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-green">Snapshot</span>
+        <div class="card-title">Snapshot</div>
+        <div class="card-subtitle">Point-in-time disk captures</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">
+          <span class="js-dynamic-price"
+                data-resource-name="Snapshot"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span>
+         <span class="unit">/GB-hour</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Instant recovery</li>
+          <li>Flexible scheduling</li>
+          <li>Zero-downtime</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/snapshot/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── NETWORK ── -->
+  <section id="network" class="section-block">
+    <div class="section-header">
+      <div class="section-icon icon-amber">🌐</div>
+      <div class="section-header-text">
+        <h2>Network</h2>
+        <p>
+          <span class="billing-pill">⏱ Hourly billing</span>
+          <span class="billing-pill">📅 Monthly billing</span>
+          Scalable networking infrastructure
+        </p>
+      </div>
+    </div>
+    <div class="cards-grid">
+
+      <div class="card">
+        <span class="card-badge badge-amber">Load Balancer</span>
+        <div class="card-title">Load Balancer</div>
+        <div class="card-subtitle">Distribute traffic across instances</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">
+          <span class="js-dynamic-price"
+                data-resource-name="Loadbalancer"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span>
+         <span class="unit">/ hr</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Multi-protocol support</li>
+          <li>Health checks</li>
+          <li>SSL offloading</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/load-balancer/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-amber">Private Network</span>
+        <div class="card-title">Private Network</div>
+        <div class="card-subtitle">Isolated secure internal networks</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">
+          <span class="js-dynamic-price"
+                data-resource-name="Network"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span>
+         <span class="unit">/ hr</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Multi-zone routing</li>
+          <li>IPv6 support</li>
+          <li>Security enforcement</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/private-network/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-amber">Virtual Router</span>
+        <div class="card-title">Virtual Router</div>
+        <div class="card-subtitle">Software-defined routing</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">
+          <span class="js-dynamic-price"
+                data-resource-name="Router"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span>
+         <span class="unit">/ hr</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Monitoring access</li>
+          <li>Built-in load balancing</li>
+          <li>Modern enterprise WAN</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/virtual-router/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-amber">Floating IP</span>
+        <div class="card-title">Floating IP</div>
+        <div class="card-subtitle">Reassignable public IPs</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">
+          <span class="js-dynamic-price"
+                data-resource-name="Floating IP"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span>
+         <span class="unit">/ hr</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Instant IP reassignment</li>
+          <li>Health checks</li>
+          <li>High availability</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/floating-ip/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+      <div class="card">
+        <span class="card-badge badge-amber">Public IP</span>
+        <div class="card-title">Public IP</div>
+        <div class="card-subtitle">Static internet-facing addresses</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price"><span class="js-dynamic-price"
+                data-resource-name="Public IP"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span>
+                 <span class="unit">/ hr</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Direct internet access</li>
+          <li>Health checks</li>
+          <li>High availability</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/public-ip/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── DBaaS ── -->
+  <section id="dbaas" class="section-block">
+    <div class="section-header">
+      <div class="section-icon icon-red">🗄️</div>
+      <div class="section-header-text">
+        <h2>DBaaS — Database as a Service</h2>
+        <p>
+          <span class="billing-pill">⏱ Hourly billing</span>
+          <span class="billing-pill">📅 Monthly billing</span>
+          Fully managed databases, zero ops overhead
+        </p>
+      </div>
+    </div>
+    <div class="cards-grid" style="max-width: 300px;">
+      <div class="card">
+        <span class="card-badge badge-amber">Managed DB</span>
+        <div class="card-title">DBaaS</div>
+        <div class="card-subtitle">Multiple database engines supported</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price"><span class="js-dynamic-price"
+                data-resource-name="DB.2.8"
+                data-currency="INR"
+                data-field="price_per_hour">Loading...</span>
+                 <span class="unit">/ hr</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Automatic patching &amp; updates</li>
+          <li>Real-time monitoring</li>
+          <li>Multiple DB engines</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/dbaas-database-as-a-service/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FWaaS ── -->
+  <section id="fwaas" class="section-block">
+    <div class="section-header">
+      <div class="section-icon icon-red">🗄️</div>
+      <div class="section-header-text">
+        <h2>FWaaS — Firewall as a Service</h2>
+        <p>
+          <span class="billing-pill">📅 Monthly billing</span>
+          Fully managed databases, zero ops overhead
+        </p>
+      </div>
+    </div>
+    <div class="cards-grid" style="max-width: 300px;">
+      <div class="card">
+        <span class="card-badge badge-amber">Managed Firewall</span>
+        <div class="card-title">Firewall</div>
+        <div class="card-subtitle">Firewall service with Fortinet integrations</div>
+        <div class="card-price-label">Starting at</div>
+        <div class="card-price">₹1,304
+                 <span class="unit">/ month</span></div>
+        <div class="card-divider"></div>
+        <ul class="card-features">
+          <li>Fortinet Integration</li>
+          <li>Layer-7 Threat Detection</li>
+          <li>One-Click Deployment</li>
+        </ul>
+        <div class="card-cta"><a href="https://acecloud.ai/pricing/linux/inr/noida/firewall/" target="_blank" class="btn-link">Complete Pricing</a></div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /main -->
+
+<!-- FOOTER STRIP -->
+<div class="footer-strip">
+  <p>Need a custom plan or volume pricing? <a href="#">Talk to our sales team →</a></p>
+</div>
+
+<script>
+  function scrollToSection(id, btn) {
+    const target = document.getElementById(id);
+    const nav = document.querySelector('.nav-wrap');
+
+    if (!target) return;
+
+    const navHeight = nav ? nav.offsetHeight : 0;
+    const extraOffset = 12;
+    const targetY = target.getBoundingClientRect().top + window.pageYOffset - navHeight - extraOffset;
+
+    window.scrollTo({
+      top: targetY,
+      behavior: 'smooth'
+    });
+
+    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+  }
+
+  const sections = ['compute', 'gpu', 'storage', 'network', 'dbaas', 'fwaas'];
+  const navBtns = document.querySelectorAll('.nav-btn');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const idx = sections.indexOf(entry.target.id);
+        navBtns.forEach(b => b.classList.remove('active'));
+        if (idx >= 0) navBtns[idx].classList.add('active');
+      }
+    });
+  }, { rootMargin: '-25% 0px -60% 0px' });
+
+  sections.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) observer.observe(el);
+  });
+</script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script>
+  const API_URL = 'https://customer.acecloud.ai/api/v1/pricing?region=ap-south-mum-1';
+  let pricingData = [];
+
+  function findByConditions(data, conditions) {
+    return data.find(item => {
+      return Object.keys(conditions).every(key => item[key] === conditions[key]);
+    });
+  }
+
+  function formatPrice(value, currency, maxFractionDigits = 5) {
+    if (value == null) return 'N/A';
+
+    const symbols = {
+      INR: '₹',
+      USD: '$'
+    };
+
+    const symbol = symbols[currency] || currency;
+
+    return symbol + Number(value).toLocaleString('en-IN', {
+      maximumFractionDigits: maxFractionDigits
+    });
+  }
+
+  function renderPrices() {
+    $('.js-dynamic-price').each(function () {
+      const $el = $(this);
+
+      const conditions = {
+        resource_name: $el.attr('data-resource-name'),
+        currency: $el.attr('data-currency')
+      };
+
+      const field = $el.attr('data-field') || 'price_per_month';
+      const maxFractionDigits = Number($el.attr('data-max-fraction-digits') || 5);
+      const item = findByConditions(pricingData, conditions);
+
+      if (item && item[field] !== undefined) {
+        $el.text(formatPrice(item[field], item.currency, maxFractionDigits));
+      } else {
+        $el.text('N/A');
+      }
+    });
+  }
+
+  function setCurrency(currency) {
+    $('.js-dynamic-price').each(function () {
+      $(this).attr('data-currency', currency);
+    });
+
+    renderPrices();
+  }
+
+  $(function () {
+    $.ajax({
+      url: API_URL,
+      method: 'GET',
+      dataType: 'json',
+      success: function (res) {
+        if (!res || res.error || !Array.isArray(res.data)) {
+          $('.js-dynamic-price').text('N/A');
+          return;
+        }
+
+        pricingData = res.data;
+        setCurrency($('#currencySelector').val() || 'INR');
+      },
+      error: function () {
+        $('.js-dynamic-price').text('Unable to load');
+      }
+    });
+  });
+</script>
+
+
+
+</body>
+</html>
